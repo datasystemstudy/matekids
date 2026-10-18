@@ -1,0 +1,31 @@
+<resources>
+    <!-- Identidad Centralizada de la App -->
+    <string name="app_name">MateKids</string>
+    <string name="tagline">“¡Aprender matemáticas es una aventura!”</string>
+
+    <!-- Navegación y Botones Principales (Sección 2) -->
+    <string name="btn_start">🚀 COMENZAR</string>
+    <string name="btn_play">🎮 JUGAR</string>
+    <string name="btn_learn">📚 APRENDER</string>
+    <string name="btn_achievements">🏆 MIS LOGROS</string>
+    <string name="btn_settings">⚙️ CONFIGURACIÓN</string>
+    <string name="btn_back">Volver</string>
+    <string name="btn_continue">Continuar</string>
+
+    <!-- Selección de Operación -->
+    <string name="title_operation_select">¿Qué quieres practicar?</string>
+    <string name="op_addition">Sumar</string>
+    <string name="op_subtraction">Restar</string>
+    <string name="op_multiplication">Multiplicar</string>
+    <string name="op_division">Dividir</string>
+
+    <!-- Pantalla de Ejercicio (Temporal Fase 4) -->
+    <string name="prompt_question">¿Cuánto es?</string>
+    <string name="selected_operation_label">Operación seleccionada: %1$s</string>
+
+    <!-- Pantalla de Progreso (Placeholder) -->
+    <string name="title_progress">Mi Progreso</string>
+
+    <!-- Pantalla de Ajustes (Placeholder) -->
+    <string name="title_settings">Configuración</string>
+</resources>
