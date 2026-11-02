@@ -10,7 +10,7 @@ android {
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.educa.mathkids"
+        applicationId = "com.poncestudios.matekids"
         minSdk = 26
         targetSdk = 36
         versionCode = 1
@@ -21,7 +21,8 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             // Para instalación y pruebas locales directas, firmar con la clave de depuración estándar
             signingConfig = signingConfigs.getByName("debug")
             proguardFiles(

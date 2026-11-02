@@ -305,7 +305,7 @@ fun ToyGamesHubScreen(
                     }
                 }
             } else if (selectedDifficulty != null) {
-                val currentDiff = selectedDifficulty!!
+                val currentDiff = selectedDifficulty ?: ToyGameDifficulty.FACIL
                 // Despacho directo al juego del juguete
                 when (selectedGameType) {
                     ToyGameType.PELOTA_JUGGLE -> {

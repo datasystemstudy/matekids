@@ -283,13 +283,13 @@ fun ProblemarioPlayScreen(
                     // TARJETA DE HISTORIA (Story) con animación al cambiar problema
                     // ============================================================
                     AnimatedContent(
-                        targetState = currentProblem.id,
+                        targetState = currentProblem,
                         transitionSpec = {
                             fadeIn(tween(350)) + slideInVertically { it / 3 } togetherWith
                                 fadeOut(tween(200))
                         },
                         label = "story_card"
-                    ) {
+                    ) { targetProblem ->
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -305,7 +305,7 @@ fun ProblemarioPlayScreen(
                                     modifier = Modifier.fillMaxWidth()
                                 ) {
                                     Text(
-                                        text = "📖 ${currentProblem.getTitle(isEnglish)}",
+                                        text = "📖 ${targetProblem.getTitle(isEnglish)}",
                                         fontSize = 13.sp,
                                         fontWeight = FontWeight.Black,
                                         fontFamily = FredokaFont,
@@ -314,7 +314,7 @@ fun ProblemarioPlayScreen(
                                 }
                                 Spacer(modifier = Modifier.height(6.dp))
                                 Text(
-                                    text = currentProblem.getStory(isEnglish),
+                                    text = targetProblem.getStory(isEnglish),
                                     fontSize = 15.sp,
                                     fontWeight = FontWeight.Bold,
                                     fontFamily = FredokaFont,

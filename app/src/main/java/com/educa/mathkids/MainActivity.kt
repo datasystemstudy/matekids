@@ -86,10 +86,6 @@ class MainActivity : ComponentActivity() {
                 com.educa.mathkids.presentation.localization.AppLanguage.fromCode(settings.language)
             }
 
-            LaunchedEffect(settings.language) {
-                ttsManager.setLanguage(settings.language)
-            }
-
             CompositionLocalProvider(
                 LocalAnimationsEnabled provides settings.animationsEnabled,
                 com.educa.mathkids.presentation.localization.LocalAppLanguage provides appLanguage

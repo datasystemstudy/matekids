@@ -49,8 +49,11 @@ import androidx.compose.ui.unit.sp
 import com.educa.mathkids.presentation.components.KidButton
 import com.educa.mathkids.presentation.components.KidCard
 import com.educa.mathkids.presentation.localization.AppLanguage
+import com.educa.mathkids.presentation.localization.LocalAppLanguage
 import com.educa.mathkids.presentation.localization.appStrings
 import com.educa.mathkids.presentation.theme.BackgroundCream
+import com.educa.mathkids.presentation.theme.BluePrimary
+import com.educa.mathkids.presentation.theme.BluePrimaryDark
 import com.educa.mathkids.presentation.theme.CoralEncouragement
 import com.educa.mathkids.presentation.theme.GreenPrimary
 import com.educa.mathkids.presentation.theme.SoftRed
@@ -60,7 +63,8 @@ import com.educa.mathkids.presentation.theme.TextDark
 fun SettingsScreen(
     viewModel: SettingsViewModel,
     onBackClick: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onWatchIntroVideo: () -> Unit = {}
 ) {
     val context = androidx.compose.ui.platform.LocalContext.current
     val settings by viewModel.settingsState.collectAsState()
@@ -230,6 +234,20 @@ fun SettingsScreen(
         }
 
         Spacer(modifier = Modifier.height(28.dp))
+
+        // Botón para volver a ver el video de introducción
+        val isEnglish = LocalAppLanguage.current == AppLanguage.INGLES
+        KidButton(
+            text = if (isEnglish) "🎬 Watch Intro Video" else "🎬 Ver video de bienvenida",
+            onClick = onWatchIntroVideo,
+            modifier = Modifier.fillMaxWidth(),
+            primaryColor = BluePrimary,
+            darkColor = BluePrimaryDark,
+            height = 56.dp,
+            fontSize = 17.sp
+        )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         // Botón de restablecimiento
         KidButton(

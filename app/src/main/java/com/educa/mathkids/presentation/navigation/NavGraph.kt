@@ -41,6 +41,7 @@ import com.educa.mathkids.presentation.screens.settings.SettingsViewModel
 import com.educa.mathkids.presentation.utils.HapticUtil
 import com.educa.mathkids.presentation.screens.numbers.NumbersScreen
 import com.educa.mathkids.presentation.screens.numbers.NumbersViewModel
+import com.educa.mathkids.presentation.screens.splash.IntroVideoScreen
 import com.educa.mathkids.presentation.screens.splash.SplashScreen
 import android.app.Activity
 import androidx.compose.runtime.rememberCoroutineScope
@@ -77,10 +78,22 @@ fun MathKidsNavGraph(
 
     NavHost(
         navController = navController,
-        startDestination = Screen.Splash.route,
+        startDestination = Screen.IntroVideo.route,
         modifier = modifier
     ) {
-        // 0. Pantalla de Bienvenida (Splash)
+        // -1. Video de Introducción Oficial
+        composable(Screen.IntroVideo.route) {
+            IntroVideoScreen(
+                onVideoFinished = {
+                    navController.navigate(Screen.Splash.route) {
+                        popUpTo(Screen.IntroVideo.route) { inclusive = true }
+                    }
+                },
+                soundManager = soundManager
+            )
+        }
+
+        // 0. Pantalla de Bienvenida (Splash con Voz y Mate)
         composable(Screen.Splash.route) {
             SplashScreen(
                 onSplashFinished = {
@@ -630,6 +643,10 @@ fun MathKidsNavGraph(
                     hapticUtil.vibrateClick()
                     soundManager.playButtonClick()
                     navController.popBackStack()
+                },
+                onWatchIntroVideo = {
+                    soundManager.playButtonClick()
+                    navController.navigate(Screen.IntroVideo.route)
                 }
             )
         }

@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
@@ -45,15 +47,28 @@ fun DynamicKidsBackground(
     val animationsEnabled = LocalAnimationsEnabled.current
 
     val infiniteTransition = rememberInfiniteTransition(label = "ambient_bg_anim")
-    val animProgress by infiniteTransition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = 12000, easing = LinearEasing),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "bg_float_progress"
-    )
+    val animProgress by if (animationsEnabled) {
+        infiniteTransition.animateFloat(
+            initialValue = 0f,
+            targetValue = 1f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(durationMillis = 12000, easing = LinearEasing),
+                repeatMode = RepeatMode.Restart
+            ),
+            label = "bg_float_progress"
+        )
+    } else {
+        androidx.compose.runtime.remember { androidx.compose.runtime.mutableFloatStateOf(0f) }
+    }
+
+    val paintDeco = remember {
+        android.graphics.Paint().apply {
+            isAntiAlias = true
+            textAlign = android.graphics.Paint.Align.CENTER
+            textSize = 24f
+            typeface = android.graphics.Typeface.DEFAULT_BOLD
+        }
+    }
 
     // Carga de números 3D oficiales de la ambientación
     val num2 = ImageBitmap.imageResource(id = R.drawable.ambient_num_2)
@@ -126,12 +141,6 @@ fun DynamicKidsBackground(
             )
 
             // 3. Estrellas y destellos decorativos sutiles en bordes libres (sin invadir textos centrales)
-            val paintDeco = android.graphics.Paint().apply {
-                isAntiAlias = true
-                textAlign = android.graphics.Paint.Align.CENTER
-                textSize = 24f
-                typeface = android.graphics.Typeface.DEFAULT_BOLD
-            }
             drawFloatingSymbol("★", width * 0.88f, height * 0.12f, android.graphics.Color.argb(45, 255, 179, 0), animProgress, 2.1f, paintDeco)
             drawFloatingSymbol("✦", width * 0.12f, height * 0.28f, android.graphics.Color.argb(40, 0, 188, 212), animProgress, 0.9f, paintDeco)
             drawFloatingSymbol("★", width * 0.88f, height * 0.82f, android.graphics.Color.argb(45, 255, 152, 0), animProgress, 1.4f, paintDeco)

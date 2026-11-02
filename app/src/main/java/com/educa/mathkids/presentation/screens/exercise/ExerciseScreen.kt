@@ -159,8 +159,9 @@ fun ExerciseScreen(
 
     // Navegación automática a resultados
     LaunchedEffect(uiState.isSessionFinished, uiState.sessionResult) {
-        if (uiState.isSessionFinished && uiState.sessionResult != null) {
-            onSessionCompleted(uiState.sessionResult!!)
+        val result = uiState.sessionResult
+        if (uiState.isSessionFinished && result != null) {
+            onSessionCompleted(result)
         }
     }
 
@@ -830,10 +831,10 @@ fun ExerciseScreen(
                                     )
                                 }
 
-                                if (uiState.streakBonusMessage != null) {
+                                uiState.streakBonusMessage?.let { bonusMsg ->
                                     Spacer(modifier = Modifier.height(2.dp))
                                     Text(
-                                        text = uiState.streakBonusMessage!!,
+                                        text = bonusMsg,
                                         fontSize = 12.sp,
                                         fontWeight = FontWeight.ExtraBold,
                                         color = Color(0xFFE65100),
@@ -894,9 +895,9 @@ fun ExerciseScreen(
                 }
 
                 // Diálogo de recompensa desbloqueada
-                if (uiState.newlyUnlockedReward != null) {
+                uiState.newlyUnlockedReward?.let { reward ->
                     RewardUnlockDialog(
-                        reward = uiState.newlyUnlockedReward!!,
+                        reward = reward,
                         onDismiss = { viewModel.onRewardDismissed() }
                     )
                 }

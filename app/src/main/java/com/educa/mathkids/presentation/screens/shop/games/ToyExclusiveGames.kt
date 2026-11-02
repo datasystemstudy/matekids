@@ -443,7 +443,7 @@ fun CrayonesColorGame(
         }
 
         // Crayón flotante durante el arrastre con el dedo
-        if (draggedCrayon != null) {
+        draggedCrayon?.let { activeCrayon ->
             Box(
                 modifier = Modifier
                     .offset { IntOffset(dragPosition.x.roundToInt() - 35, dragPosition.y.roundToInt() - 55) }
@@ -452,17 +452,17 @@ fun CrayonesColorGame(
                     .shadow(10.dp, RoundedCornerShape(16.dp))
                     .clip(RoundedCornerShape(16.dp))
                     .background(SurfaceWhite)
-                    .border(3.dp, draggedCrayon!!.color, RoundedCornerShape(16.dp))
+                    .border(3.dp, activeCrayon.color, RoundedCornerShape(16.dp))
                     .padding(horizontal = 16.dp, vertical = 10.dp),
                 contentAlignment = Alignment.Center
             ) {
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(text = "🖍️", fontSize = 32.sp)
                     Text(
-                        text = "${draggedCrayon!!.number}",
+                        text = "${activeCrayon.number}",
                         fontSize = 20.sp,
                         fontWeight = FontWeight.Black,
-                        color = draggedCrayon!!.color
+                        color = activeCrayon.color
                     )
                 }
             }

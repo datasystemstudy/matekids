@@ -17,3 +17,5 @@ captures/
 .cxx
 *.apk
 !app/release/*.apk
+screenshot*.png
+video matekids.mp4

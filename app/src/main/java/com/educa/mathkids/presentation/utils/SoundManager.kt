@@ -28,7 +28,7 @@ class SoundManager(private val context: Context) {
     var isSoundEnabled: Boolean = true
 
     // Sintetizador melódico con AudioTrack (MODE_STATIC) de latencia ultra baja
-    private val musicalTracks = mutableMapOf<Int, AudioTrack>()
+    private val musicalTracks = java.util.concurrent.ConcurrentHashMap<Int, AudioTrack>()
     // Frecuencias exactas en Hz para las notas musicales (C4, D4, E4, F4, G4, A4, B4, C5)
     private val noteFrequencies = doubleArrayOf(
         261.63, // 0: Do
@@ -55,7 +55,7 @@ class SoundManager(private val context: Context) {
     private var soundIdWelcome: Int = 0
     private var soundIdApplause: Int = 0
 
-    private val loadedSounds = mutableSetOf<Int>()
+    private val loadedSounds = java.util.Collections.synchronizedSet(mutableSetOf<Int>())
 
     private var lastPlayTime: Long = 0L
     private val minDebounceIntervalMs = 70L
@@ -63,7 +63,10 @@ class SoundManager(private val context: Context) {
     init {
         initSoundPool()
         initToneGenerator()
-        initMusicalSynth()
+        // Carga asíncrona de síntesis de notas para no bloquear el arranque de la UI
+        Thread {
+            initMusicalSynth()
+        }.start()
     }
 
     private fun initMusicalSynth() {

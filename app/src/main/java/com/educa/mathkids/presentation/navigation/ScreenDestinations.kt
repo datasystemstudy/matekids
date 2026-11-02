@@ -6,6 +6,7 @@ import com.educa.mathkids.domain.model.OperationType
 import com.educa.mathkids.domain.model.SessionResult
 
 sealed class Screen(val route: String) {
+    object IntroVideo : Screen("intro_video")
     object Splash : Screen("splash")
     object Home : Screen("home")
     object Numbers : Screen("numbers?tab={tab}") {

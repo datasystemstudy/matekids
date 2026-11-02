@@ -52,7 +52,6 @@ import com.educa.mathkids.presentation.theme.SlateDark
 import com.educa.mathkids.presentation.theme.SurfaceWhite
 import com.educa.mathkids.presentation.utils.SoundManager
 import com.educa.mathkids.presentation.utils.TtsManager
-import kotlinx.coroutines.delay
 
 /**
  * Pantalla de Bienvenida (Splash Screen) interactiva y festiva para niños.
@@ -99,7 +98,6 @@ fun SplashScreen(
             targetValue = 1f,
             animationSpec = tween(700, easing = FastOutSlowInEasing)
         )
-        // Permanece en la pantalla de bienvenida hasta que el usuario pulse ¡EMPEZAR!
     }
 
     DynamicKidsBackground(modifier = modifier) {
@@ -212,7 +210,7 @@ fun SplashScreen(
 
             Spacer(modifier = Modifier.weight(1f))
 
-            // 3. BOTÓN RÁPIDO PARA COMENZAR INMEDIATAMENTE (permanece en pantalla hasta pulsar)
+            // 3. BOTÓN RÁPIDO PARA COMENZAR INMEDIATAMENTE
             AnimatedGameButton(
                 text = if (isEnglish) "🚀 START!" else "🚀 ¡EMPEZAR!",
                 onClick = {
