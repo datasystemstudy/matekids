@@ -19,3 +19,5 @@ captures/
 !app/release/*.apk
 screenshot*.png
 video matekids.mp4
+*.jks
+*.keystore
